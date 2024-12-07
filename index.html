@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片压缩工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部标题 -->
+        <header>
+            <h1>图片压缩工具</h1>
+            <p>简单快速地压缩您的图片</p>
+        </header>
+
+        <!-- 全局控制区域 -->
+        <div class="global-controls">
+            <div class="preset-controls">
+                <label>场景预设：
+                    <select id="presetSelect">
+                        <option value="custom">自定义设置</option>
+                        <option value="social">社交媒体</option>
+                        <option value="web">网站展示</option>
+                        <option value="print">打印质量</option>
+                    </select>
+                </label>
+            </div>
+            <button id="downloadAllBtn" class="download-all-btn" style="display:none">批量下载</button>
+        </div>
+
+        <!-- 上传区域 -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-content">
+                <img src="upload-icon.svg" alt="上传图标" class="upload-icon">
+                <p>拖拽图片到这里 或 <label for="fileInput" class="upload-button">选择图片</label></p>
+                <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            </div>
+        </div>
+
+        <!-- 在 preview-area 之前添加编辑工具栏 -->
+        <div class="edit-toolbar" style="display: none" id="editToolbar">
+            <div class="edit-controls">
+                <button id="cropBtn" class="edit-btn">裁剪</button>
+                <button id="filterBtn" class="edit-btn">滤镜</button>
+                <button id="adjustBtn" class="edit-btn">调整</button>
+            </div>
+            <div class="edit-panels">
+                <!-- 裁剪面板 -->
+                <div id="cropPanel" class="edit-panel" style="display: none">
+                    <label>裁剪比例：
+                        <select id="cropRatio">
+                            <option value="free">自由裁剪</option>
+                            <option value="1:1">1:1 正方形</option>
+                            <option value="4:3">4:3 横向</option>
+                            <option value="16:9">16:9 宽屏</option>
+                        </select>
+                    </label>
+                    <button id="applyCrop">应用裁剪</button>
+                    <button id="cancelCrop">取消</button>
+                </div>
+                <!-- 滤镜面板 -->
+                <div id="filterPanel" class="edit-panel" style="display: none">
+                    <button data-filter="none" class="filter-btn">原图</button>
+                    <button data-filter="grayscale" class="filter-btn">黑白</button>
+                    <button data-filter="sepia" class="filter-btn">复古</button>
+                    <button data-filter="warm" class="filter-btn">暖色</button>
+                    <button data-filter="cool" class="filter-btn">冷色</button>
+                </div>
+                <!-- 调整面板 -->
+                <div id="adjustPanel" class="edit-panel" style="display: none">
+                    <label>亮度：
+                        <input type="range" id="brightness" min="-100" max="100" value="0">
+                    </label>
+                    <label>对比度：
+                        <input type="range" id="contrast" min="-100" max="100" value="0">
+                    </label>
+                    <label>饱和度：
+                        <input type="range" id="saturation" min="-100" max="100" value="0">
+                    </label>
+                    <button id="applyAdjust">应用调整</button>
+                    <button id="resetAdjust">重置</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 预览区域 -->
+        <div class="preview-area" id="previewArea">
+            <!-- 这里将通过 JavaScript 动态添加预览内容 -->
+        </div>
+
+        <!-- 进度提示 -->
+        <div id="progressContainer" class="progress-container" style="display:none">
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+            <p id="progressText">处理中...</p>
+        </div>
+    </div>
+
+    <!-- Web Worker 脚本 -->
+    <script id="workerScript" type="javascript/worker">
+        self.onmessage = function(e) {
+            // Web Worker 处理逻辑将在这里实现
+        }
+    </script>
+
+    <script src="script.js"></script>
+
+    <!-- 在 script.js 之前添加 JSZip 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</body>
+</html> 
